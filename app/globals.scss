@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+}
+
+.main-wrapper {
+    width: 80%;
+    height: 100vh;
+    display: block;
+    background: #ddd;
+    margin: auto;
+
+    .card {
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 20px;
+            font-size: 25px;
+            background: transparent;
+        }
+    }
+}
