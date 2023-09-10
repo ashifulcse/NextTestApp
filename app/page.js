@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import StaticCounter from "./components/StaticCounter";
 import DynamicCounter from "./components/DynamicCounter";
 import ConditionsCheckBox from "./components/ConditionsCheckBox";
+import Link from "next/link";
 
 
 export default function Home() {
     const [data, setData] = useState([]);
     const [searchText, setSearchText] = useState('');
 
- 
+
 
     useEffect(() => {
         async function fetchData() {
@@ -29,11 +30,11 @@ export default function Home() {
         item.title.toLowerCase().includes(searchText.toLowerCase())
     );
 
- 
+
 
     const [isCheckedStatic, setIsCheckedStatic] = useState(false);
-    const [isCheckedDynamic, setIsCheckedDynamic] = useState(false); 
- 
+    const [isCheckedDynamic, setIsCheckedDynamic] = useState(false);
+
     return (
         <>
             <div className="main-wrapper">
@@ -45,8 +46,13 @@ export default function Home() {
                                     Conditions Component
                                 </div>
 
-                                <ConditionsCheckBox isCheckedStatic={isCheckedStatic}  setIsCheckedStatic={setIsCheckedStatic} setIsCheckedDynamic={setIsCheckedDynamic} isCheckedDynamic={isCheckedDynamic} /> 
-                               
+                                <ConditionsCheckBox
+                                    isCheckedStatic={isCheckedStatic}
+                                    setIsCheckedStatic={setIsCheckedStatic}
+                                    setIsCheckedDynamic={setIsCheckedDynamic}
+                                    isCheckedDynamic={isCheckedDynamic}
+                                />
+
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -89,19 +95,28 @@ export default function Home() {
                             Count: Total Posts {filteredData.length}
                         </div>
                     </div>
-                    <div className="card-body"> 
+                    <div className="card-body">
                         <div>
                             <input
                                 type="text"
                                 placeholder="Search"
                                 value={searchText}
                                 onChange={(e) => setSearchText(e.target.value)}
-                            />
-                            <ul>
-                                {filteredData.map((item) => (
-                                    <li key={item.id}>{item.title}</li>
-                                ))}
-                            </ul>
+                            /> 
+                                {filteredData.map((item, index) => (
+                                    <>
+                                    
+                                        <div key={index} className="p-3" >
+                                            <h3>{item.id}. {item.title}</h3>
+                                            <p>{item.body}</p> 
+
+                                            <hr/>
+                                        </div>
+                                    
+                                    </>
+                                   
+                                    
+                                ))} 
                         </div>
                     </div>
                 </div>
