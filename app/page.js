@@ -103,19 +103,13 @@ export default function Home() {
                                 value={searchText}
                                 onChange={(e) => setSearchText(e.target.value)}
                             /> 
-                                {filteredData.map((item, index) => (
-                                    <>
-                                    
-                                        <div key={index} className="p-3" >
+                                {filteredData.map((item) => (
+                                        <div key={item.id} className="p-3" >
                                             <h3>{item.id}. {item.title}</h3>
                                             <p>{item.body}</p> 
 
                                             <hr/>
                                         </div>
-                                    
-                                    </>
-                                   
-                                    
                                 ))} 
                         </div>
                     </div>
