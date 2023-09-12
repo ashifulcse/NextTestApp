@@ -1,28 +1,18 @@
 import { useEffect, useState } from "react";
 
-export default function StaticCounter() {
-    const [staticCount, setStaticCount] = useState(() => {
-        const storedCount = localStorage.getItem('staticCount');
-        return storedCount ? parseInt(storedCount) : 0;
-    });
-    
-    useEffect(() => {
-        localStorage.setItem('staticCount', staticCount);
-    }, [staticCount]);
-
+export default function StaticCounter({dataCount, setDataCount}) { 
     const minValue = 0;
-    const maxValue = 5;
 
     const handleIncrementStatic = (staticIncrementValue) => {
-        setStaticCount(Math.min(staticCount + staticIncrementValue, maxValue));
+        setDataCount(Math.min(dataCount + staticIncrementValue));
     };
+
     const handleDecrementStatic = (staticDecrementValue) => {
-        setStaticCount(Math.max(staticCount - staticDecrementValue, minValue));
+        setDataCount(Math.max(dataCount - staticDecrementValue, minValue));
     };
 
     return (
-        <div className="my-4">
-            <h1>Static Count: {staticCount}</h1>
+        <div className="my-4"> 
             <button onClick={() => handleIncrementStatic(1)}>Increment</button>
             <button onClick={() => handleDecrementStatic(1)}>Decrement</button>
         </div>
