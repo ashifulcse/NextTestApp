@@ -71,24 +71,23 @@ export default function Home() {
                         </div>
 
 
-                        <div className="card-body">
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="Search"
-                                    value={searchText}
-                                    onChange={(e) => setSearchText(e.target.value)}
-                                />
-                                {filteredData.map((item) => (
-                                    <div key={item.id} className="p-3" >
-                                        <h3>{item.id}. {item.title}</h3>
-                                        <p>{item.body}</p>
+                        <div className="card-body"> 
+                            <input
+                                type="text"
+                                placeholder="Search"
+                                value={searchText}
+                                onChange={(e) => setSearchText(e.target.value)}
+                            />
 
-                                        <hr />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                            {filteredData.map((item) => (
+                                <div key={item.id} className="p-3" >
+                                    <h3>{item.id}. {item.title}</h3>
+                                    <p>{item.body}</p>
+
+                                    <hr />
+                                </div>
+                            ))} 
+                    </div>
                     </div>
                 </div>
             </div>
