@@ -1,42 +1,45 @@
 "use client"
- 
+
 import { useEffect, useState } from "react";
 import StaticCounter from "./components/StaticCounter";
 import DynamicCounter from "./components/DynamicCounter";
-import ConditionsCheckBox from "./components/ConditionsCheckBox"; 
+import ConditionsCheckBox from "./components/ConditionsCheckBox";
 import Header from "./components/Header";
 
 export default function Home() {
     const [data, setData] = useState([]);
-    const [searchText, setSearchText] = useState(''); 
+    const [searchText, setSearchText] = useState('');
+    const [dataCount, setDataCount] = useState();
 
-    const [dataCount, setDataCount] = useState(() => {
-        const storedCount = localStorage.getItem('dataCount');
-        return storedCount ? parseInt(storedCount) : 0;
-    });
+    // const [dataCount, setDataCount] = useState(() => {
+    //     const storedCount = localStorage.getItem('dataCount');
+    //     return storedCount ? parseInt(storedCount) : 0;
+    // });
+
+    // useEffect(() => {
+    //     if (typeof localStorage !== 'undefined') {
+    //         localStorage.setItem('dataCount', dataCount);
+    //     }
+    // }, [dataCount]);
+
 
     useEffect(() => {
-        localStorage.setItem('dataCount', dataCount);
-    }, [dataCount]);
- 
-
-    useEffect(() => { 
         fetch('https://jsonplaceholder.typicode.com/posts')
-          .then((response) => response.json())
-          .then((apiData) => {
-            setData(apiData);
-            setDataCount(apiData.length);
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
+            .then((response) => response.json())
+            .then((apiData) => {
+                setData(apiData);
+                setDataCount(apiData.length);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
     }, []);
 
 
     const filteredData = data.filter((item) =>
         item.title.toLowerCase().includes(searchText.toLowerCase())
     );
-  
+
 
     const [isCheckedStatic, setIsCheckedStatic] = useState(false);
     const [isCheckedDynamic, setIsCheckedDynamic] = useState(false);
@@ -48,7 +51,7 @@ export default function Home() {
                     <div className="card">
 
                         <Header dataCount={dataCount} />
-                         
+
                         <ConditionsCheckBox
                             isCheckedStatic={isCheckedStatic}
                             setIsCheckedStatic={setIsCheckedStatic}
@@ -59,19 +62,19 @@ export default function Home() {
 
                         <div className="card">
                             <div className="card-body">
-                                {isCheckedStatic && 
-                                    <StaticCounter dataCount={dataCount} setDataCount={setDataCount}  /> 
+                                {isCheckedStatic &&
+                                    <StaticCounter dataCount={dataCount} setDataCount={setDataCount} />
                                 }
 
-                                {isCheckedDynamic && 
-                                    <DynamicCounter dataCount={dataCount} setDataCount={setDataCount} /> 
+                                {isCheckedDynamic &&
+                                    <DynamicCounter dataCount={dataCount} setDataCount={setDataCount} />
                                 }
 
                             </div>
                         </div>
 
 
-                        <div className="card-body"> 
+                        <div className="card-body">
                             <input
                                 type="text"
                                 placeholder="Search"
@@ -86,8 +89,8 @@ export default function Home() {
 
                                     <hr />
                                 </div>
-                            ))} 
-                    </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
